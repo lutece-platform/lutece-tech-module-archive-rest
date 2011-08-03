@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
+    <!-- Plugin Informations -->
+    <name>archive-rest</name>
+    <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
+    <version>1.0.0</version>
+    <documentation/>
+    <installation/>
+    <changes/>
+    <user-guide/>
+    <description>module.archive.rest.plugin.description</description>
+    <provider>module.archive.rest.plugin.provider</provider>
+    <provider-url>http://lutece.paris.fr</provider-url>
+    <icon-url>images/admin/skin/plugins/html/modules/rest/archive-rest.png</icon-url>
+    <copyright>Copyright 2001-2011 Mairie de Paris</copyright>
+	<core-version-dependency>
+		<min-core-version>2.4.0</min-core-version>
+		<max-core-version/>
+	</core-version-dependency>
+
+	<!-- if the plugin must have a connection pool with parameter : 1 - yes, 0 - no -->
+    <db-pool-required>0</db-pool-required>
+    
+     <filters>
+       <filter>
+           <filter-name>archiveWsSecurity</filter-name>
+           <url-pattern>/rest/archive/*</url-pattern>
+           <filter-class>fr.paris.lutece.util.signrequest.servlet.HeaderHashRequestFilter</filter-class>
+
+           <init-param>
+               <param-name>elementsSignature</param-name>
+               <param-value>archive_item_key,folder_to_archive,archive_destination,archive_name,archive_type</param-value>
+           </init-param>
+
+           <init-param>
+               <param-name>validityTimePeriod</param-name>
+               <param-value>0</param-value>
+           </init-param>
+
+           <init-param>
+               <param-name>privateKey</param-name>
+               <param-value>change me</param-value>
+           </init-param>
+       </filter>
+   </filters>
+    
+    
+    
+</plug-in>
