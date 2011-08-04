@@ -74,7 +74,7 @@ public class ArchiveRest
     @POST
     @Path( "informationArchive" )
     @Produces( MediaType.TEXT_PLAIN )
-    public String informationArchive( @QueryParam( "archive_item_key" )
+    public String informationArchive(@FormParam( "archive_item_key" )
     String archiveItemKey )
     {
         {
@@ -96,7 +96,7 @@ public class ArchiveRest
     @POST
     @Path( "removeArchive" )
     @Produces( MediaType.TEXT_PLAIN )
-    public void removeArchive( @QueryParam( "archive_item_key" )
+    public void removeArchive( @FormParam( "archive_item_key" )
     String archiveItemKey )
     {
         {
