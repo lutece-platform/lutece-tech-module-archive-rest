@@ -10,7 +10,7 @@
     <description>module.archive.rest.plugin.description</description>
     <provider>module.archive.rest.plugin.provider</provider>
     <provider-url>http://lutece.paris.fr</provider-url>
-    <icon-url>images/admin/skin/plugins/html/modules/rest/archive-rest.png</icon-url>
+    <icon-url>images/admin/skin/plugins/archive/modules/rest/archive-rest.png</icon-url>
     <copyright>Copyright 2001-2011 Mairie de Paris</copyright>
 	<core-version-dependency>
 		<min-core-version>2.4.0</min-core-version>

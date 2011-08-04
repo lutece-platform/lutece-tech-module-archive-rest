@@ -33,99 +33,88 @@
  */
 package fr.paris.lutece.plugins.archive.modules.rest.rs;
 
+import fr.paris.lutece.plugins.archive.service.archive.IArchiveService;
+import fr.paris.lutece.plugins.rest.service.RestConstants;
+import fr.paris.lutece.portal.service.util.AppLogService;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import fr.paris.lutece.plugins.archive.service.archive.IArchiveService;
-import fr.paris.lutece.plugins.rest.service.RestConstants;
-import fr.paris.lutece.portal.service.util.AppLogService;
 
 /**
- * QuizRest
+ * ArchiveRest
  */
-@Path(RestConstants.BASE_PATH + "archive")
+@Path( RestConstants.BASE_PATH + "archive" )
 /**
  *
  * @author pierre
  */
-public class ArchiveRest {
-	
-	private IArchiveService archiveService;
-	
-	
+public class ArchiveRest
+{
+    private IArchiveService archiveService;
 
+    @GET
+    @Path( "generateArchive" )
+    @Produces( MediaType.TEXT_PLAIN )
+    public String generateArchive( @QueryParam( "folder_to_archive" )
+    String strFolderToArchive, @QueryParam( "archive_destination" )
+    String strArchiveDestination, @QueryParam( "archive_name" )
+    String strArchiveName, @QueryParam( "archive_type" )
+    String strArchiveType )
+    {
+        return Integer.toString( archiveService.generateArchive( strFolderToArchive, strArchiveDestination,
+                strArchiveName, strArchiveType ) );
+    }
 
-	@GET
-	@Path("generateArchive")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String generateArchive(
-			@QueryParam("folder_to_archive") String strFolderToArchive,
-			@QueryParam("archive_destination") String strArchiveDestination,
-			@QueryParam("archive_name") String strArchiveName,
-			@QueryParam("archive_type") String strArchiveType) {
-		{
+    @GET
+    @Path( "informationArchive" )
+    @Produces( MediaType.TEXT_PLAIN )
+    public String informationArchive( @QueryParam( "archive_item_key" )
+    String archiveItemKey )
+    {
+        {
+            int nArchiveItemKey = -1;
 
-			return Integer.toString(archiveService
-					.generateArchive(strFolderToArchive, strArchiveDestination,
-							strArchiveName, strArchiveType));
+            try
+            {
+                nArchiveItemKey = Integer.parseInt( archiveItemKey );
+            }
+            catch ( NumberFormatException e )
+            {
+                AppLogService.error( e );
+            }
 
-		}
+            return archiveService.informationArchive( nArchiveItemKey );
+        }
+    }
 
-	}
-	
-	
-	@GET
-	@Path("informationArchive")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String informationArchive(
-			@QueryParam("archive_item_key") String archiveItemKey) {
-		{
+    @GET
+    @Path( "removeArchive" )
+    @Produces( MediaType.TEXT_PLAIN )
+    public void removeArchive( @QueryParam( "archive_item_key" )
+    String archiveItemKey )
+    {
+        {
+            int nArchiveItemKey = -1;
 
-			
-			int nArchiveItemKey=-1;
-			try
-			{
-			nArchiveItemKey=Integer.parseInt(archiveItemKey);
-			}catch (NumberFormatException e) {
-			
-				AppLogService.error(e);
-			}
-			return archiveService
-					.informationArchive(nArchiveItemKey);
+            try
+            {
+                nArchiveItemKey = Integer.parseInt( archiveItemKey );
+            }
+            catch ( NumberFormatException e )
+            {
+                AppLogService.error( e );
+            }
 
-		}
+            archiveService.removeArchive( nArchiveItemKey );
+        }
+    }
 
-	}
-	
-	
-	@GET
-	@Path("removeArchive")
-	@Produces(MediaType.TEXT_PLAIN)
-	public void removeArchive(
-			@QueryParam("archive_item_key") String archiveItemKey) {
-		{
-
-			
-			int nArchiveItemKey=-1;
-			try
-			{
-			nArchiveItemKey=Integer.parseInt(archiveItemKey);
-			}catch (NumberFormatException e) {
-			
-				AppLogService.error(e);
-			}
-			archiveService
-					.removeArchive(nArchiveItemKey);
-
-		}
-
-	}
-	
-	public void setArchiveService(IArchiveService archiveService) {
-		this.archiveService = archiveService;
-	}
-
+    public void setArchiveService( IArchiveService archiveService )
+    {
+        this.archiveService = archiveService;
+    }
 }
