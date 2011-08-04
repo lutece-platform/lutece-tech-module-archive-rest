@@ -37,7 +37,9 @@ import fr.paris.lutece.plugins.archive.service.archive.IArchiveService;
 import fr.paris.lutece.plugins.rest.service.RestConstants;
 import fr.paris.lutece.portal.service.util.AppLogService;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -56,20 +58,20 @@ public class ArchiveRest
 {
     private IArchiveService archiveService;
 
-    @GET
+    @POST
     @Path( "generateArchive" )
     @Produces( MediaType.TEXT_PLAIN )
-    public String generateArchive( @QueryParam( "folder_to_archive" )
-    String strFolderToArchive, @QueryParam( "archive_destination" )
-    String strArchiveDestination, @QueryParam( "archive_name" )
-    String strArchiveName, @QueryParam( "archive_type" )
+    public String generateArchive( @FormParam( "folder_to_archive" )
+    String strFolderToArchive, @FormParam( "archive_destination" )
+    String strArchiveDestination, @FormParam( "archive_name" )
+    String strArchiveName, @FormParam( "archive_type" )
     String strArchiveType )
     {
         return Integer.toString( archiveService.generateArchive( strFolderToArchive, strArchiveDestination,
                 strArchiveName, strArchiveType ) );
     }
 
-    @GET
+    @POST
     @Path( "informationArchive" )
     @Produces( MediaType.TEXT_PLAIN )
     public String informationArchive( @QueryParam( "archive_item_key" )
@@ -91,7 +93,7 @@ public class ArchiveRest
         }
     }
 
-    @GET
+    @POST
     @Path( "removeArchive" )
     @Produces( MediaType.TEXT_PLAIN )
     public void removeArchive( @QueryParam( "archive_item_key" )
