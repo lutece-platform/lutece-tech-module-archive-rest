@@ -51,7 +51,7 @@
     <properties>
         <componentName>archive-rest</componentName>
         <jiraProjectName>ARCHIVEREST</jiraProjectName>
-        <jiraComponentId></jiraComponentId>
+        <jiraComponentId>10576</jiraComponentId>
     </properties>
 
     <scm>
