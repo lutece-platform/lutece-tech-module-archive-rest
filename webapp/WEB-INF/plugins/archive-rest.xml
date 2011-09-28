@@ -28,7 +28,7 @@
 
            <init-param>
                <param-name>elementsSignature</param-name>
-               <param-value>archive_item_key,folder_to_archive,archive_destination,archive_name,archive_type</param-value>
+               <param-value>archive_item_key</param-value>
            </init-param>
 
            <init-param>
